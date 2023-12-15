@@ -1,0 +1,96 @@
+﻿
+<h1>
+    Fix Assets
+</h1>
+@(
+Html.Kendo().TreeList<FixAsset>()
+    .Name("fixassettreelist")
+    .Toolbar(toolbar =>   toolbar.Create()  )
+    .Columns(columns =>
+    {
+        columns.Add().Field(e => e.AssetId).Width(100);
+        columns.Add().Field(e => e.ParentId).Width(100);
+       columns.Add().Field(e => e.LocationId).EditorTemplateComponentName("LocationId").Width(100); 
+       columns.Add().Field(e => e.AssetName) .Width(300);
+         columns.Add().Field(e => e.Quantity) .Width(100);
+ 
+        columns.Add().Command(c =>
+        {
+            c.CreateChild() ;
+            c.Edit() ;
+            c.Destroy() ;
+        
+        })
+        .HtmlAttributes(new
+        {
+            style = "text-align: center;"
+        });
+    })
+    .Editable()
+
+    .DataSource(dataSource => dataSource
+         .Create(create => create.Action("FixAsset_Create", "Home"))
+        .Read(read => read.Action("FixAsset_All", "Home"))
+        .Update(update => update.Action("FixAsset_Update", "Home"))
+        .Destroy(delete => delete.Action("FixAsset_Destroy", "Home"))
+        .Model(m =>
+        {
+            m.Id(f => f.AssetId);
+            m.ParentId(f => f.ParentId);
+            m.Expanded(false);
+              m.Field(f => f.LocationId);
+            m.Field(f => f.AssetName);
+            m.Field(f => f.Quantity);
+ 
+        })
+    )
+    .Height(540)
+)
+
+ 
+
+<br />
+<h1>
+Locations
+</h1>
+
+@(
+Html.Kendo().TreeList<Location>()
+.Name("locationtreelist")
+.Toolbar(toolbar => { toolbar.Create() ; toolbar.Excel(); })
+.Columns(columns =>
+{
+    columns.Add().Field(e => e.LocationId).Width(100);
+    columns.Add().Field(e => e.ParentId).Width(100);
+    columns.Add().Field(e => e.LocationName) .Width(100);
+ 
+
+    columns.Add() .Command(c =>
+    {
+        c.CreateChild() ;
+        c.Edit() ;
+        c.Destroy() ;
+    })
+    .HtmlAttributes(new
+    {
+        style = "text-align: center;"
+    });
+})
+.Editable()
+
+.DataSource(dataSource => dataSource
+     .Create(create => create.Action("Location_Create", "Home"))
+    .Read(read => read.Action("Location_All", "Home"))
+    .Update(update => update.Action("Location_Update", "Home"))
+    .Destroy(delete => delete.Action("Location_Destroy", "Home"))
+    .Model(m =>
+    {
+        m.Id(f => f.LocationId);
+        m.ParentId(f => f.ParentId);
+        m.Expanded(true);
+        m.Field(f => f.LocationName);
+     })
+)
+.Height(540)
+)
+ 

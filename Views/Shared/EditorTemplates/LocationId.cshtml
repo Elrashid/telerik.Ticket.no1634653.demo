@@ -1,0 +1,14 @@
+﻿@model int
+
+@Html.Kendo().Template().AddComponent(x => x.DropDownList() 
+     .Name("dropdowntree")
+     .DataTextField("Name")
+    .HtmlAttributes(new { style = "width: 100%" })
+    .DataSource(dataSource => dataSource
+        .Read(read => read
+            .Action("LocationId_DropDown_Read", "Home")
+        )
+        ) 
+)
+ 
+             
