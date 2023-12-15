@@ -9,7 +9,7 @@ namespace telerik.Ticket.no1634653.demo.Controllers
 
     public static class DataStore
     { 
-
+      
         public static List<Location> locations = new List<Location>() {
         new Location(){ LocationId=500, LocationName="5th Flower",ParentId=null},
         new Location(){ LocationId=600, LocationName="6th Flower",ParentId=null},
@@ -23,10 +23,12 @@ namespace telerik.Ticket.no1634653.demo.Controllers
         new FixAsset(){ AssetId=50102,LocationId=501, AssetName="LCD Screen",ParentId=50101},
         new FixAsset(){ AssetId=50103,LocationId=501, AssetName="Computer Tower",ParentId=50101},
         };
+ 
          
     }
     public class HomeController : Controller
     {
+
   
 
         public IActionResult Index()
